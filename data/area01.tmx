@@ -42,5 +42,11 @@
     <property name="spritewidth" value="75"/>
    </properties>
   </object>
+  <object name="KeyEntity" x="440" y="300" width="80" height="40">
+   <properties>
+    <property name="image" value="key"/>
+    <property name="spritewidth" value="60"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

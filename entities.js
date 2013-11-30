@@ -1,5 +1,16 @@
 var a=0;
 var b=0;
+var KeyEntity = me.CollectableEntity.extend({
+    init: function(x, y, settings) {
+        this.parent(x, y, settings);
+    },
+ 
+    onCollision: function() {
+        console.log("key picked");
+        this.collidable = false;
+        me.game.remove(this);
+    }
+});
 var PlayerEntity = me.ObjectEntity.extend({
 	//constructor
     init: function(x, y, settings) {
@@ -136,6 +147,7 @@ var PlayerEntity = me.ObjectEntity.extend({
             this.updateOnGround();
          
         }
+        var res = me.game.collide(this);
         this.updateAnimation();
         this.handleFallOffMap();
 

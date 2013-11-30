@@ -8,6 +8,7 @@ var g_resources = [
     {name: "sky_backdrop", type: "image", src: "data/sky_backdrop.png"},
 	{name: "game_over", type: "tmx", src: "data/game_over.tmx"},
 	{name: "character", type: "image", src: "data/character.png"},
+    {name: "key", type: "image", src: "data/levels/key_yellow.png"},
     {name: "jump", type: "audio", src: "data/audio/", channel: 1},
     {name: "outdoor_sound", type: "audio", src: "data/audio/", channel: 2}
 ];
@@ -77,7 +78,7 @@ var jsApp = {
 
 	   // add our player entity in the entity pool
 	   me.entityPool.add("mainPlayer", PlayerEntity);
-           
+       me.entityPool.add("KeyEntity", KeyEntity);
 	   // enable the keyboard
 	   me.input.bindKey(me.input.KEY.LEFT, "left");
 	   me.input.bindKey(me.input.KEY.RIGHT, "right");
