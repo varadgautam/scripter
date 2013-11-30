@@ -77,13 +77,14 @@ var jsApp = {
 
 	   // add our player entity in the entity pool
 	   me.entityPool.add("mainPlayer", PlayerEntity);
-
+           
 	   // enable the keyboard
 	   me.input.bindKey(me.input.KEY.LEFT, "left");
 	   me.input.bindKey(me.input.KEY.RIGHT, "right");
 	   me.input.bindKey(me.input.KEY.UP, "jump", true);
 	   // start the game 
 	   me.state.change(me.state.PLAY);
+           
 	}
  
 };

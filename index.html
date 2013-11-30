@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Scripter</title>
+  <style type="text/css" media="screen">
+    body {
+        overflow: hidden;
+    }
+    
+    #editor { 
+        margin: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 810px;
+        right: 0;
+    }
+  </style>
 		
-	</head>
-	<body bgcolor="black">
+</head>
+	<body bgcolor="black" style="position: absolute; left: 45px;">
 		<center>
-			<div id="jsapp">
+			<div id="jsapp" style="left:10px">
 				<font color="#FFFFFF", style="position: absolute; font-size: 10px; font-family: Courier New">
 					<span id="framecounter">(0/0)</span>
 				</font>
@@ -14,5 +31,46 @@
 				<script type="text/javascript" src="main.js"></script>
 			</div>
 		</center>
+<pre id="editor" style="width:400px;height:560px">
+</pre>
+<input type="button" value="Run" onClick="script()" style="position: absolute;right:-70px;bottom: 10px"/>
+    
+<script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+     var VAR = {
+    myvalue: 0,
+    c: 0,
+    doublejump: 0,
+    block: false
+            };
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monkai");
+    editor.getSession().setMode("ace/mode/javascript");
+     function script(){
+     //alert(editor.session.getValue());
+    eval(editor.session.getValue());
+    }
+/* polluted source code :vg*/
+function walk(n){
+  VAR.myvalue=10;
+  VAR.block = true;
+  setTimeout(function () {
+      VAR.myvalue=0;
+      VAR.block = false;
+    }, n*1000);
+}
+function jump(direction){ /* 'l' or 'r' or 'u' */
+    VAR.c = direction;
+    console.log("you want me to jump");
+}
+/* Yes, I know and I'm sorry. :vg*/
+function doublejump(){
+    jump();
+    doublejump = 1;
+    
+}
+ 
+</script>
+
 	</body>
 </html>

@@ -1,5 +1,6 @@
+var a=0;
+var b=0;
 var PlayerEntity = me.ObjectEntity.extend({
-
 	//constructor
     init: function(x, y, settings) {
 
@@ -58,6 +59,7 @@ var PlayerEntity = me.ObjectEntity.extend({
     },
 
     updateInAir: function () {
+        this.doubleJumping = VAR.doublejump;
         if (me.input.isKeyPressed('left')) {
             this.vel.x -= this.accel.x * me.timer.tick;
         }
@@ -65,11 +67,13 @@ var PlayerEntity = me.ObjectEntity.extend({
             this.vel.x += this.accel.x * me.timer.tick;
         }
 
-        if (me.input.isKeyPressed('jump') && !this.doubleJumping) {
+        if ((a==1 || me.input.isKeyPressed('jump')) && !this.doubleJumping) {
         	me.audio.play("jump", false, function() {}, .7);
             this.forceJump();
             this.doubleJumping = true;
+            //alert(a);
         }
+       
     },
 
     updateOnGround: function () {
@@ -78,20 +82,50 @@ var PlayerEntity = me.ObjectEntity.extend({
             this.vel.x -= this.accel.x * me.timer.tick;
         }
         else if (me.input.isKeyPressed('right')) {
+            //this.vel.x =1;  
             this.flipX(false);
             this.vel.x += this.accel.x * me.timer.tick;
         }
         else {
-            this.vel.x = 0;
+            this.vel.x = VAR.myvalue;
+            //console.log(a);
+            
         }
-        if (me.input.isKeyPressed('jump')) {
+        if ((VAR.myvalue == 0 && VAR.c == 'u') || me.input.isKeyPressed('jump')) {
+            console.log("so i'll jump");
             if (!this.jumping && !this.falling) {
 	        	me.audio.play("jump", false, function() {}, .7);
                 this.doJump();
+                
             }
+            VAR.c=0;
+            //VAR.c=1;
+        }
+        else if(!VAR.block && VAR.myvalue >= 0 && VAR.c == 'r'){
+            console.log("jumping right");
+            if (!this.jumping && !this.falling) {
+                me.audio.play("jump", false, function() {}, .7);
+                this.vel.x = 10;
+                this.doJump();   
+            }
+            VAR.c=0;
+        }
+        else if(!VAR.block && VAR.myvalue >= 0 && VAR.c == 'l'){
+            console.log("jumping left");
+            if (!this.jumping && !this.falling) {
+                me.audio.play("jump", false, function() {}, .7);
+                this.flipX(false);
+                this.vel.x = -10;
+                this.doJump();   
+                
+            }
+            
+            VAR.c=0;
         }
     },
-
+    
+    
+   
     //update player position
     update: function() {
         if (this.jumping || this.falling) {
@@ -100,8 +134,8 @@ var PlayerEntity = me.ObjectEntity.extend({
         else {
             this.doubleJumping = false;
             this.updateOnGround();
+         
         }
-
         this.updateAnimation();
         this.handleFallOffMap();
 
@@ -111,5 +145,6 @@ var PlayerEntity = me.ObjectEntity.extend({
         this.parent(this);
         return true;
     }
-
+ 
 });
+
