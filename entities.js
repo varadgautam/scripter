@@ -40,6 +40,7 @@ var PlayerEntity = me.ObjectEntity.extend({
                                     10,10,10,10,10,10,10,
                                     10,10,10,10,10,10,10], 4);
         this.doubleJumping = false;
+        this.gravity = 0.65;
     },
 
     die: function () {
@@ -117,7 +118,7 @@ var PlayerEntity = me.ObjectEntity.extend({
             if (!this.jumping && !this.falling) {
                 me.audio.play("jump", false, function() {}, .7);
                 this.vel.x = 10;
-                this.doJump();   
+                this.doJump();
             }
             VAR.c=0;
         }
@@ -125,7 +126,7 @@ var PlayerEntity = me.ObjectEntity.extend({
             console.log("jumping left");
             if (!this.jumping && !this.falling) {
                 me.audio.play("jump", false, function() {}, .7);
-                this.flipX(false);
+                //this.flipX(false);
                 this.vel.x = -10;
                 this.doJump();   
                 
