@@ -97,7 +97,7 @@ var PlayScreen = me.ScreenObject.extend({
         // stuff to reset on state change
         me.game.addHUD(0, 0);
 
-        me.audio.play("outdoor_sound", true);
+        //me.audio.play("outdoor_sound", true);
  
         // add a new HUD item
         me.game.HUD.addItem("lives", new LivesObject());

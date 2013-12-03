@@ -33,13 +33,13 @@
 		</center>
 <pre id="editor" style="width:400px;height:560px">
 </pre>
-<input type="button" value="Run" onClick="script()" style="position: absolute;right:-70px;bottom: 10px"/>
-    
+<input type="button" value="Run" onClick="script()" style="position: absolute;right:10px;top: 10px"/>
+
 <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
      var VAR = {
     myvalue: 0,
-    c: 0,
+    
     doublejump: 0,
     block: false
             };
@@ -51,19 +51,54 @@
     eval(editor.getSession().getValue());
     }
 /* polluted source code :vg*/
-function walk(n){
-  VAR.myvalue=10;
+
+/* walkqueue, concurrent for multiple consecutive calls */
+var walkqueue = [];
+function walk(){       /* THIS NOW WORKS */
+  player = me.game.getEntityByName("mainPlayer")[0];
+  /* Amazing code follows. *
+   * Queue implemented, move by 60px for each call. *
+   * Not clearing queues. This was fun. *
+   */
+  walkqueue.push(function(){
+                    player.doWalk(false);
+                    setInterval(function() {
+                        if(player.pos.x - currentPosX > 60){
+                            player.vel.x = 0;
+                        }
+                    }, 20);
+                 });
+
+  if(walkqueue.length > 0){
+    executeQueue = setInterval(function(){
+                                   if(walkqueue.length > 0 && player.vel.x == 0){
+                                       currentPosX = player.pos.x; 
+                                       (walkqueue.shift())();
+                                   }
+                               }, 20);
+  }
+  else{
+  console.log("clear");
+    window.clearInterval(executeQueue);
+    currentPosX = player.pos.x;
+  }
+  
+  
+  /*
+  
+  VAR.myvalue=10;   // NOT HOW THINGS ARE DONE. :vg
   VAR.block = true;
   setTimeout(function () {
       VAR.myvalue=0;
       VAR.block = false;
     }, n*1000);
+    */
 }
 function jump(direction){ /* 'l' or 'r' or 'u' */
     VAR.c = direction;
     console.log("you want me to jump");
 }
-/* Yes, I know and I'm sorry. :vg*/
+/* Yes, I know and I'm sorry. :vg*//* not needed anymore */
 function doublejump(){
     jump();
     doublejump = 1;
