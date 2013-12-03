@@ -88,7 +88,7 @@ var PlayerEntity = me.ObjectEntity.extend({
        
     },
 
-    updateOnGround: function () {
+    updateOnGround: function () {/*
         if (me.input.isKeyPressed('left')) {
             this.flipX(true);
             this.vel.x -= this.accel.x * me.timer.tick;
@@ -133,7 +133,7 @@ var PlayerEntity = me.ObjectEntity.extend({
             }
             
             VAR.c=0;
-        }
+        }*/
     },
     
     
