@@ -48,9 +48,11 @@ var PlayerEntity = me.ObjectEntity.extend({
     },
 
     handleFallOffMap: function() {
-        if (this.pos.y > 500) {
-            this.die();
+        if (this.pos.x > 1460) {
+            Redirect();
         }
+        else if (this.pos.y > 500)
+        this.die();
     },
 
     //update animation

@@ -4,6 +4,16 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Scripter</title>
+  <link type="text/css" rel="stylesheet" href="css/rhinoslider-1.05.css" />
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+		<script type="text/javascript" src="js/rhinoslider-1.05.min.js"></script>
+		<script type="text/javascript" src="js/mousewheel.js"></script>
+		<script type="text/javascript" src="js/easing.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#slider').rhinoslider();
+			});
+		</script>
   <style type="text/css" media="screen">
     body {
         overflow: hidden;
@@ -17,23 +27,71 @@
         left: 810px;
         right: 0;
     }
+    #slider {
+	    width:450px;
+	    height:250px;
+				
+	    /*IE bugfix*/
+	    padding:0;
+	    margin:0;
+	 }
+			
+	#slider li { list-style:none; }
+			
+	#page {
+		width:450px;
+		margin:50px auto;
+	       }
   </style>
 		
 </head>
-	<body bgcolor="black" style="position: absolute; left: 45px;">
-		<center>
-			<div id="jsapp" style="left:10px">
-				<font color="#FFFFFF", style="position: absolute; font-size: 10px; font-family: Courier New">
-					<span id="framecounter">(0/0)</span>
-				</font>
-				<script type="text/javascript" src="lib/melonJS-0.9.6-min.js"></script>
-				<script type="text/javascript" src="entities.js"></script>
-				<script type="text/javascript" src="main.js"></script>
-			</div>
-		</center>
-<pre id="editor" style="width:400px;height:560px">
+	<body bgcolor="black" style="position: absolute; left: 0px;">
+                <center>
+                        <div id="jsapp" style="left:10px">
+                                <font color="#FFFFFF", style="position: absolute; font-size: 10px; font-family: Courier New">
+                                        <span id="framecounter">(0/0)</span>
+                                </font>
+                                <script type="text/javascript" src="lib/melonJS-0.9.6-min.js"></script>
+                                <script type="text/javascript" src="entities.js"></script>
+                                <script type="text/javascript" src="main.js"></script>
+                        </div>
+                </center>
+<pre id="editor" style="width:450px;height:250px">
 </pre>
-<input type="button" value="Run" onClick="script()" style="position: absolute;right:-70px;bottom: 10px"/>
+<input type="button" value="Run" onClick="script()" style="position: absolute;right:-70px;bottom: 325px"/>
+<div id="page" style="position:absolute;background:#ccc;top:235px;left:810px;width:450px;">
+			<ul id="slider">
+<li><br><br><br>Hey there!!!<br>I am Mario and i am here to teach you programming<br>I will teach you programming concepts by making you play a game,interesting right?<br>Lets start then!!<br>In this level i am going to teach you about variable declaration,functions,loops and conditionals</li>
+
+<li><br><br><br>Lets talk about variables first.What is a variable?<br>A variable is the name for a place in the computer's memory where you store some data.Confused? Let me explain in a simple way<br>Imagine a very large warehouse with lots of storage bays, tables, shelves, special rooms etc. These are all places where you can store something. Lets imagine we have a crate of apples in the warehouse. Where exactly is it located?</li>
+
+<li><br><br><br>We wouldn't say that it is stored 31' 2" from the west wall and 27' 8" from the north wall. In programming terms we also wouldn't say that my total salary paid this year is stored in four bytes starting at location 123,476,542,732 in RAM.<br>The computer will place variables in different locations each time our program is run. However our program knows exactly where the data is located. We do this by creating a variable to refer to it and then let the compiler handle all the messy details about where it is actually located.</li>
+
+<li><br><br><br>Now lets create our first variable.<br>var i=2;<br>Here we are creating a varible i and storing the value 2 in it.Why did i use a semi colon in the end? Here each statement terminates with a semi colon.<br>Now we have successfully initialized a variable and stored a value in it.In the coming part you will learn about how to use these variables</li>
+				
+<li><br><br><br>Lets talk about conditionals now<br>Conditionals are expressions that evaluate to either true or false. They are mostly used to determine Program Flow through if statements and while loops.<br>Often a computer program must make choices on which way to proceed, e.g., if the ball is in bounds, do one thing, else, do something different... if the all data has been processed, end the program, else continue to the next data item... while the player has lives left continue the game etc<br>These "things" are called Conditions. Usually this is in the form of a mathematical statment using equals, less-than, or greater-than.</li>
+
+<li><br><br><br>Lets see with an example<br>var i=2;<br>if(i==1){<br>i=i+1;<br>}<br>else{<br>i=i-1;<br>}<br>Here we are assigning value 2 to a variable i and then checking whether the value of i is 1 or not.It is is one we are adding 1 to the i value and substracting 1 if it is not</li>
+
+<li><br><br><br>What are functions in programming?<br>Functions are "self contained" modules of code that accomplish a specific task.Once a function is written, it can be used over and over and over again. When a function is "called" the program "leaves" the current section of code and begins to execute the first line inside the function.In case of inbuilt functions mostly we don't care how a function does it.We should know what is supposed to go into them, and what is supposed to come out of them.</li>
+
+<li><br><br><br>Now lets see what loop's are<br>Loops allows us to repeat a single (or several) lines of code over and over again. This allows us to "write once" and then "execute many times".Lets see with an example<br>var i=5;<br>while(i>0){<br>i=i-1; //Decreasing the value of i by one<br>}</li>
+
+<li><br><br><br>In this example we were declaring a variable i by giving value 5 to it.Then "while(i>0)" checks whether the value of i os grater than zero or it,if it is greater than zero then the statement "i=i-1" inside the brackets gets executed and value of i is decreased.Then again "while(i>0)" gets executed and this loop keeps on running until i becomes zero<br>The statement which starts with "//" is called a comment.We write comments in between the code to make it more understanble.Comments are ignored by the compiler</li>
+
+<li><br><br><br>Now you are ready to play this level of the game.I will now teach you how to control the character<br>var i = 3;<br>
+while(i > 0){<br>
+    walk();         // walk i = 3 steps forward because it is executed "i" times <br>
+    if(i == 2){<br>
+        jump();     // jump when i becomes 2 <br>
+             }<br>
+      i=i-1;<br>
+}<br></li>
+<li><li><br><br><br>Now lets try to understand what is written in the code.You are seeing the statements "walk()" and "jump()" for the first time.walk and jump are the internal functions which make the character walk and jump respectively."walk()" This is how we call the jump function.Each time "walk" function is called the character moves one step ahead and each time "jump" function is called the character jumps once<br>So,in the code written above character walks two steps ahead then jumps once and then walks one more ste ahead.</li>
+
+<li><li><br><br><br><br>Now,for completing this level you have write a short script to move the character to the end of the map by avoiding the obstacles in between.The map is 25 steps long and the pothole is after two steps.Dont forget to collect the key!!<br>Happy Coding and All the Best!!</li>
+			</ul>
+</div>
     
 <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
@@ -69,6 +127,12 @@ function doublejump(){
     doublejump = 1;
     
 }
+
+function Redirect()
+{
+    window.location="newgame.html";
+}
+
  
 </script>
 
