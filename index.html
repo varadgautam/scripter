@@ -100,23 +100,71 @@ while(i > 0){<br>
 
 <script src="src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
-     var VAR = {
-    myvalue: 0,
+var walkqueue = [];
+var walking = false;
+var jumpedyet = false;
+var VAR = {
+   myvalue: 0,
     
     doublejump: 0,
     block: false
             };
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monkai");
-    editor.getSession().setMode("ace/mode/javascript");
-     function script(){
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/monkai");
+editor.getSession().setMode("ace/mode/javascript");
+function script(){
      //alert(editor.session.getValue());
+     walking = true;
+     jumpedyet = false;
     eval(editor.getSession().getValue());
     }
 /* polluted source code :vg*/
 
 /* walkqueue, concurrent for multiple consecutive calls */
-var walkqueue = [];
+
+var runqueue = [];
+/* jump */
+function jump(){
+    player = me.game.getEntityByName("mainPlayer")[0];
+    
+    //stop();
+    
+    //if(walkqueue.length == 0){
+        walk();
+        player.doJump();
+        console.log("jump" + player.vel.x);
+      //  }
+    //player.doWalk(false);
+    /*if(walkqueue.length > 0){
+        setInterval(function(){
+                    player.
+        })
+    }*/
+    /*if(walkqueue.length == 0){*/
+    /*jumpExec = setInterval(function(){
+                if(!walking && !jumpedyet){
+                    //stop();
+                    player.vel.x += 30;
+                    player.doJump();
+                    setTimeout(function(){player.vel.x = 0; jumpedyet = true; console.log("landed");}, 800);
+                    
+                }
+        }, 100);
+     if(jumpedyet){
+        clearInterval(jumpExec);
+        console.log("jump clear");
+        //walking = true;
+     }
+   //  jumpedyet = false;
+    /*}*/
+}
+
+function stop(){
+    player = me.game.getEntityByName("mainPlayer")[0];
+    walkqueue = [];
+    //player.vel.x = 0;
+}
+
 function walk(){       /* THIS NOW WORKS */
   player = me.game.getEntityByName("mainPlayer")[0];
   /* Amazing code follows. *
@@ -131,6 +179,7 @@ function walk(){       /* THIS NOW WORKS */
                     setInterval(function() {
                         if(player.pos.x - currentPosX > 60){
                             player.vel.x = 0;
+                            walking = false;
                         }
                     }, 20);
                  });
@@ -140,6 +189,7 @@ function walk(){       /* THIS NOW WORKS */
                                    if(walkqueue.length > 0 && player.vel.x == 0){
                                        currentPosX = player.pos.x; 
                                        (walkqueue.shift())();
+                                       walking = true;
                                    }
                                }, 20);
   }
@@ -160,10 +210,11 @@ function walk(){       /* THIS NOW WORKS */
     }, n*1000);
     */
 }
-function jump(direction){ /* 'l' or 'r' or 'u' */
+/*
+function jump(direction){ /* 'l' or 'r' or 'u' *//*
     VAR.c = direction;
     console.log("you want me to jump");
-}
+}*/
 /* Yes, I know and I'm sorry. :vg*//* not needed anymore */
 function doublejump(){
     jump();
